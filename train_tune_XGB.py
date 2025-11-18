@@ -16,7 +16,7 @@ from scipy.stats import randint
 
 #================ choose filenames here ================#
 
-parquetfn = "data/fhvhv_tripdata_2019-02.parquet"
+parquetfn = "data/fhvhv_tripdata_2019-02_subset.parquet"
 pklfn = "cleaned_df_features_2019-02.pkl"
 
 bestfn = "script_train_tune_XGB_best_xgb.pkl"

@@ -8,8 +8,8 @@ import sys
 
 #================ choose filenames here ================#
 
-parquetfn = "data/fhvhv_tripdata_2019-02.parquet"
-pklfn = "cleaned_df_features_2019-02.pkl"
+parquetfn = "fhvhv_tripdata_2019-02_subset.parquet"
+pklfn = "fhvhv_tripdata_2019-02_subset.pkl"
 
 #=======================================================#
 
@@ -20,27 +20,14 @@ def load_preprocess(parquetfn, pklfn):
 
     print("loading data: ",parquetfn)
 
-    print("resulting dataframe will be saved in: ", pklfn)
+    print("resulting dataframe being saved in: ", pklfn)
 
     df = pd.read_parquet(parquetfn)
 
-
     df = df_preprocess(df)
 
-
-    # a small set of features that should be easy to handle (no huge one-hot)
-    # all numerical features are easy
-    numerics = ["wait_time_sec_log1p","trip_miles_log1p","trip_time_log1p"]
-    # short list of categoricals
-    curated_cat = ["hvfhs_license_num","wav_request_flag","shared_flag_or","day_of_week","hour_of_day"]
-    # other categoricals
-    other_cat = ["PULocationID","DOLocationID"]
-
-
-
-
     with open(pklfn, "wb") as f:
-        pickle.dump((df, numerics, curated_cat, other_cat), f)
+        pickle.dump((df, f)
     
     return df
     
