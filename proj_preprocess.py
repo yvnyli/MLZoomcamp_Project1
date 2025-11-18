@@ -9,25 +9,19 @@ import sys
 #================ choose filenames here ================#
 
 parquetfn = "fhvhv_tripdata_2019-02_subset.parquet"
-pklfn = "fhvhv_tripdata_2019-02_subset.pkl"
 
 #=======================================================#
 
 
 
 
-def load_preprocess(parquetfn, pklfn):
+def load_preprocess(parquetfn):
 
     print("loading data: ",parquetfn)
-
-    print("resulting dataframe being saved in: ", pklfn)
 
     df = pd.read_parquet(parquetfn)
 
     df = df_preprocess(df)
-
-    with open(pklfn, "wb") as f:
-        pickle.dump((df, f)
     
     return df
     
@@ -159,4 +153,4 @@ def df_preprocess(df):
 
 if __name__ == '__main__':
     
-    df = load_preprocess(parquetfn, pklfn)  # load dataset and train encoder
+    df = load_preprocess(parquetfn)  # load dataset and train encoder

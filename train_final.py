@@ -14,7 +14,6 @@ from xgboost import XGBRegressor
 #================ choose filenames here ================#
 
 parquetfn = "fhvhv_tripdata_2019-02_subset.parquet"
-pklfn = "fhvhv_tripdata_2019-02_subset.pkl"
 
 bestfn = "script_train_final_mdl.pkl"
 
@@ -76,7 +75,7 @@ if __name__ == '__main__':
 
     print("train_final_XGB: For illustration purposes, ",
           "we will train on a smaller subset of the data.") 
-    df = load_preprocess(parquetfn, pklfn)
+    df = load_preprocess(parquetfn)
 
     print("Data size:")
     
