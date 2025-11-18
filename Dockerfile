@@ -6,7 +6,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Set the working directory inside the container to /code
 # All subsequent commands will be run from here
-#WORKDIR /code
+WORKDIR /code
 
 # Add the virtual environment's bin directory to the PATH so Python tools work globally
 ENV PATH="/code/.venv/bin:$PATH"
