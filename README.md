@@ -9,7 +9,7 @@ A subset of this data is also on [Kaggle, titled "NYC FHV (Uber/Lyft) Trip Data 
 *The entire dataset is too large. For this project, only one month of data (one file) is used and it is linked in this repo.*
 
 This table contains 20,159,102 rows and 24 columns about ride share rides that happened in Febrary 2019.  
-It is still a very large dataset. While I enjoyed getting experience on working with large data, **for reproducibility, I have included a smaller data file in the same format.**
+It is still a very large dataset. While I enjoyed getting experience on working with large data, **for reproducibility, I have included a smaller data file in the same format**, "data/fhvhv_tripdata_2019-02_subset.parquet".
 
 ### ML problem
 **Let's predict the cost of a ride: base_passenger_fare, which is the base passenger fare before tolls, tips, taxes, and fees.**
@@ -38,12 +38,13 @@ They can be run from head to toe but will take a long time (hours to overnight f
   - encountered classic RAM and training time issues because the dataset is overly large, and learned a lot.
 - 3_modeling_full.ipynb, where I ...
   - unsatisfied with the performance on limited features, and assessing the feasibility to add more complexity, trained the models on all features,
-- 4_testing.ipynb, where I ...
+- train_final.py, where I ...
   - selected the best model based on validation performance obtained in 2_ and 3_,
+    - by simply checking the RMSE number, choosing the lowest, and jotting down the hyperparams
   - retrained it on full non-testing data,
   - checked performance on testing data to approximate how it will do in production.
 
-The preprocessing workflow and the model training workflow have been converted to Python scripts (proj_preprocess.py and train_tune_XGB.py).
+The preprocessing workflow and the final model training workflow have been converted to Python scripts (proj_preprocess.py and train_final.py).
 
 For reproducibility, I changed data path to the smaller file, so you can test the scripts quickly.
 
@@ -64,36 +65,25 @@ Visit: http://localhost:9696/docs
 
 **Here are some test cases you can paste:**
 
-``
-
-``
-
-``
-
-``
-
-
-## Notes and command line workflows
-Start the project by setting up dependency management with uv.
+1. Ground truth: 182.29  
 ```
-(cd into working directory)
-uv init
-uv venv
-.venv\Scripts\activate
-uv add pandas scikit-learn xgboost seaborn fastapi uvicorn
-uv add --dev psutil pympler tqdm
+{"hvfhs_license_num":"HV0003","dispatching_base_num":"B02764","originating_base_num":"B02764","request_datetime":1550567148000,"on_scene_datetime":1550568539000,"pickup_datetime":1550568671000,"dropoff_datetime":1550571604000,"PULocationID":48,"DOLocationID":132,"trip_miles":27.64,"trip_time":2934,"tolls":5.76,"bcf":4.7,"sales_tax":16.69,"congestion_surcharge":2.75,"airport_fee":null,"tips":18.15,"driver_pay":155.58,"shared_request_flag":"N","shared_match_flag":"N","access_a_ride_flag":"N","wav_request_flag":"N","wav_match_flag":null}
 ```
 
-Explore data with a notebook.
+2. Ground truth: 20.34  
 ```
-(cd into working directory)
-(.venv\Scripts\activate)
-uv run --with jupyter jupyter lab
+{"hvfhs_license_num":"HV0003","dispatching_base_num":"B02617","originating_base_num":"B02617","request_datetime":1550695843000,"on_scene_datetime":1550695857000,"pickup_datetime":1550696106000,"dropoff_datetime":1550697076000,"PULocationID":116,"DOLocationID":140,"trip_miles":6.57,"trip_time":969,"tolls":0.0,"bcf":0.51,"sales_tax":1.81,"congestion_surcharge":2.75,"airport_fee":null,"tips":0.0,"driver_pay":15.79,"shared_request_flag":"N","shared_match_flag":"N","access_a_ride_flag":"N","wav_request_flag":"N","wav_match_flag":null}
 ```
 
+3. Ground truth: 20.68  
+```
+{"hvfhs_license_num":"HV0003","dispatching_base_num":"B02875","originating_base_num":"B02875","request_datetime":1549458548000,"on_scene_datetime":1549458661000,"pickup_datetime":1549458701000,"dropoff_datetime":1549459853000,"PULocationID":249,"DOLocationID":137,"trip_miles":2.37,"trip_time":1152,"tolls":0.0,"bcf":0.52,"sales_tax":1.84,"congestion_surcharge":2.75,"airport_fee":null,"tips":0.0,"driver_pay":12.45,"shared_request_flag":"N","shared_match_flag":"N","access_a_ride_flag":"N","wav_request_flag":"N","wav_match_flag":null}
+```
 
-Cloud deployment
-0 points: No deployment to the cloud
-1 point: Docs describe clearly (with code) how to deploy the service to cloud or kubernetes cluster (local or remote)
-2 points: There's code for deployment to cloud or kubernetes cluster (local or remote). There's a URL for testing - or video/screenshot of testing it
-Total max 16 points
+4. Ground truth: 7.47  
+```
+{"hvfhs_license_num":"HV0005","dispatching_base_num":"B02510","originating_base_num":null,"request_datetime":1549393556000,"on_scene_datetime":null,"pickup_datetime":1549393722000,"dropoff_datetime":1549394059000,"PULocationID":227,"DOLocationID":227,"trip_miles":1.26,"trip_time":299,"tolls":0.0,"bcf":0.19,"sales_tax":0.66,"congestion_surcharge":0.0,"airport_fee":null,"tips":0.0,"driver_pay":5.39,"shared_request_flag":"N","shared_match_flag":"N","access_a_ride_flag":"N","wav_request_flag":"N","wav_match_flag":null}
+```
+
+## Cloud deployment
+I will do it in the next project.
