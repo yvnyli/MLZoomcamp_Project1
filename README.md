@@ -1,5 +1,11 @@
 # Predict ride share price
 
+---
+
+If you are reviewing my project, please refer to "Project_evaluation.md" for a guide of which files are what. Thank you for your time.
+
+---
+
 ## Problem description
 ### Motivation
 Ride share services (Uber/Lyft) take great care into setting the price of rides. The process is opaque and mysterious; there are even myths about the companies dynamically charging more depending on tiny differences in addresses or time, ripping off customers and drivers ([ref1](https://www.theguardian.com/technology/2025/jun/25/second-study-finds-uber-used-opaque-algorithm-to-dramatically-boost-profits), [ref2](https://www.cnn.com/2024/04/03/business/dynamic-surge-pricing-nightcap)). Thus, it would be very interesting to figure out what features the companies base pricing on.
