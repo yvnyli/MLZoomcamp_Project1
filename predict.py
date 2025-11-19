@@ -6,6 +6,7 @@ import gc
 import pandas as pd
 import numpy as np
 import sys
+from pprint import pprint
 
 
 
@@ -195,7 +196,6 @@ def single_dict_to_df(dc):
         else:
             df.at[0, col] = value
 
-    return df
     # transform
     df = df_preprocess(df)
     return df
@@ -204,7 +204,16 @@ def predict_single(trip):
     
     # from dict to df to X with dv
     df = single_dict_to_df(trip)
-    X_single = dv_full.transform(df)
+    
+    print("df")
+    print(type(df))
+    pprint(df)
+    
+    print("trip")
+    print(type(trip))
+    pprint(trip)
+    
+    X_single = dv_full.transform(df.to_dict(orient='records'))
     
     fare = mdl.predict(X_single)
     return float(fare)
